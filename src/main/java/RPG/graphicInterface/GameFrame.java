@@ -33,17 +33,6 @@ public class GameFrame extends Stage {
     private Button boutonAction;
 
 
-
-    public void changerEtatNourrir(boolean b){
-        boutonLancerDes.setDisable(b);
-    }
-
-    public void changerEtatJouer(boolean b){
-        boutonAction.setDisable(b);
-    }
-
-
-
     public GameFrame(Hero hero) {
         super();
 
@@ -106,6 +95,25 @@ public class GameFrame extends Stage {
         URL input = GameFrame.class.getResource("/image/"+image+".png");
         Image imageCharacter = new Image(input.toExternalForm(),x,y-100,false,true);
         this.imageHeroView.setImage(imageCharacter);
+    }
+
+    public void editTextBoutonAction(String text){
+        boutonAction.setText(text);
+    }
+
+    public void editStateBoutonAction(Boolean state){
+        boutonAction.setDisable(!state);
+    }
+
+    public void changerStateBoutonLancerDes(Boolean state){
+        boutonLancerDes.setDisable(!state);
+    }
+
+    public void editTextMessageEtat(String text){
+        messageEtat.setText(text);
+    }
+    public void editTextMessage(String text){
+        messageEtat.setText(text);
     }
 
 
