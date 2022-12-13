@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 
 public class GameFrame extends Stage {
+    private static GameFrame gameFrame;
     private static final int x = 400;
     private static final int y = 400;
     private Label messageEtat;
@@ -34,11 +35,15 @@ public class GameFrame extends Stage {
 
     private Button boutonInfoCharacter;
 
-
-    public GameFrame(Hero hero) {
+    public static GameFrame getInstance(){
+        if(gameFrame == null){
+            gameFrame = new GameFrame();
+        }
+        return gameFrame;
+    }
+    private GameFrame() {
         super();
-
-        this.hero = hero;
+        this.hero = Hero.getIntance();
         //PicturePanel heroImagePanel = new PicturePanel(x, y,"/image/tamagoshi.png");
         BorderPane pane = new BorderPane();
         Scene scene = new Scene(pane, x*2, y);
@@ -58,13 +63,16 @@ public class GameFrame extends Stage {
                 //Action du Bouton
             }
         });
-        boutonAction = new Button("?");
+        boutonAction = new Button("Prochaine Rencontre");
         boutonAction.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
-                //Action Bouton d'action
-                boutonAction.setText("test");
-                hero.levelUp();
+                if(hero.getSkillPoint()>0){
+                    editTextMessage("Impossible tant que tous les points de compétence on était attribué");
+                }
+                else{
+                    editTextMessage("Lancement de la prochaine rencontre");
+                }
             }
         });
 

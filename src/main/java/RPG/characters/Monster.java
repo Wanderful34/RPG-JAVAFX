@@ -1,7 +1,7 @@
 package RPG.characters;
 
 public class Monster extends Character{
-    public Monster(int maxHp, int currentHp, int force, int armor) {
-        super(maxHp, currentHp, force, armor);
+    public Monster(Hero hero) {
+        super(25+hero.getLevel()*2, 25+hero.getLevel()*2, 12+hero.getLevel()*2, 12+hero.getLevel()*2);
     }
 }
