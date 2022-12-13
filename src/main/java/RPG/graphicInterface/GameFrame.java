@@ -61,6 +61,7 @@ public class GameFrame extends Stage {
             @Override
             public void handle(ActionEvent arg0) {
                 //Action du Bouton
+                hero.levelUp();
             }
         });
         boutonAction = new Button("Prochaine Rencontre");
@@ -81,7 +82,7 @@ public class GameFrame extends Stage {
             @Override
             public void handle(ActionEvent arg0) {
                 //Action Bouton d'action
-                CharacterInfoFrame c = new CharacterInfoFrame(hero);
+                CharacterInfoFrame c = new CharacterInfoFrame();
             }
         });
 
@@ -127,8 +128,12 @@ public class GameFrame extends Stage {
         boutonAction.setDisable(!state);
     }
 
-    public void changerStateBoutonLancerDes(Boolean state){
+    public void editStateBoutonLancerDes(Boolean state){
         boutonLancerDes.setDisable(!state);
+    }
+
+    public void editStateBoutonInfoCharacter(Boolean state){
+        boutonInfoCharacter.setDisable(!state);
     }
 
     public void editTextMessageEtat(String text){

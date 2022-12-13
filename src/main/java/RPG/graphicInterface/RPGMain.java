@@ -15,10 +15,8 @@ import java.util.Optional;
 
 public class RPGMain extends Application{
 
-	private final static int NBTROUR = 20;
-	public void initialisation() {
 
-	}
+
 	
 	@Override
 	public void start(Stage arg0) throws Exception {
@@ -26,15 +24,8 @@ public class RPGMain extends Application{
 		GameFrame game = GameFrame.getInstance();
 		game.editTextMessageEtat("Tour 1");
 
-		//for(int i=0;i<NBTROUR;i++){}
 
 		
-	}
-	
-	public void play() {
-		Hero hero = Hero.getIntance();
-		GameFrame game = GameFrame.getInstance();
-
 	}
 	
 	public static void main(String[] args) {

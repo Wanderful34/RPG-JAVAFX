@@ -5,12 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class CharacterInfoFrame extends Stage {
 
@@ -26,10 +28,28 @@ public class CharacterInfoFrame extends Stage {
     private final Label levelLabel;
     private final Hero hero;
 
-    public CharacterInfoFrame(Hero hero){
+    public CharacterInfoFrame(){
         super();
-        this.hero=hero;
+        GameFrame g = GameFrame.getInstance();
+        g.editStateBoutonInfoCharacter(false);
+        this.hero=Hero.getIntance();
+        this.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
 
+                if(hero.getSkillPoint()>0){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Finir vos action");
+                    alert.setContentText("Utiliser tout vos point de compétences");
+                    event.consume();
+                }
+                else{
+                    g.editStateBoutonInfoCharacter(true);
+                    close();
+                }
+            }
+        });
         //PicturePanel heroImagePanel = new PicturePanel(x, y,"/image/tamagoshi.png");
         BorderPane pane = new BorderPane();
         Scene scene = new Scene(pane, 400, 150);
@@ -84,6 +104,7 @@ public class CharacterInfoFrame extends Stage {
         this.setTitle("Information Héro");
         this.setScene(scene);
         this.show();
+
     }
 
     private void updateFrame(){

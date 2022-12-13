@@ -1,5 +1,7 @@
 package RPG.characters;
 
+import RPG.graphicInterface.CharacterInfoFrame;
+
 public class Hero extends Character{
 
 
@@ -27,6 +29,7 @@ public class Hero extends Character{
     public void levelUp(){
         this.skillPoint = skillPoint+3;
         this.level++;
+        CharacterInfoFrame c = new CharacterInfoFrame();
         int hp = getCurrentHp();
         int hpMax = getMaxHp();
         hp = hp+(hp/10);
