@@ -94,6 +94,7 @@ public class GameFrame extends Stage {
     public void editImageCharacter(String image){
         if(imageCharacterView == null){
             this.imageCharacterView = new ImageView();
+            //bonjour
         }
         URL input = GameFrame.class.getResource("/image/"+image+".png");
         Image imageCharacter = new Image(input.toExternalForm(),x,y-100,false,true);
