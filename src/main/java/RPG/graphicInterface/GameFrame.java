@@ -32,6 +32,8 @@ public class GameFrame extends Stage {
     private Button boutonLancerDes;
     private Button boutonAction;
 
+    private Button boutonInfoCharacter;
+
 
     public GameFrame(Hero hero) {
         super();
@@ -62,10 +64,22 @@ public class GameFrame extends Stage {
             public void handle(ActionEvent arg0) {
                 //Action Bouton d'action
                 boutonAction.setText("test");
+                hero.levelUp();
             }
         });
+
+        boutonInfoCharacter = new Button("Fiche Personnage");
+        boutonInfoCharacter.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent arg0) {
+                //Action Bouton d'action
+                CharacterInfoFrame c = new CharacterInfoFrame(hero);
+            }
+        });
+
         boxBouton.getChildren().add(boutonAction);
         boxBouton.getChildren().add(boutonLancerDes);
+        boxBouton.getChildren().add(boutonInfoCharacter);
         pane.setTop(message);
         pane.setBottom(boxBouton);
 

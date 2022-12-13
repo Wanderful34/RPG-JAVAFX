@@ -4,6 +4,47 @@ public abstract class Character {
     private int maxHp;
     private int currentHp;
 
+    private int force;
+
+    private int armor;
 
 
+    public Character(int maxHp, int currentHp, int force, int armor) {
+        this.maxHp = maxHp;
+        this.currentHp = currentHp;
+        this.force = force;
+        this.armor = armor;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+    }
+
+    public int getCurrentHp() {
+        return currentHp;
+    }
+
+    public void setCurrentHp(int currentHp) {
+        this.currentHp = currentHp;
+    }
+
+    public int getForce() {
+        return force;
+    }
+
+    public void setForce(int force) {
+        this.force = force;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
 }
