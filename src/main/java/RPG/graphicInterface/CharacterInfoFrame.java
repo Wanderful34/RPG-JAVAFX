@@ -42,6 +42,7 @@ public class CharacterInfoFrame extends Stage {
                     alert.setTitle("Erreur");
                     alert.setHeaderText("Finir vos action");
                     alert.setContentText("Utiliser tout vos point de compétences");
+                    alert.show();
                     event.consume();
                 }
                 else{

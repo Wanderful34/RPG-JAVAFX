@@ -36,6 +36,7 @@ public class Combat {
 
     public void combatEnd(){
         this.frame.close();
+        GameFrame.getInstance().editStateBoutonAction(true);
     }
 
     public int dmgCalcul(int lancesDes){

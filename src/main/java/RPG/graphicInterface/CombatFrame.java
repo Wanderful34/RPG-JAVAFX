@@ -75,6 +75,8 @@ public class CombatFrame extends Stage {
         pane.setTop(message);
         pane.setBottom(boxBouton);
 
+        this.imageHeroView = new ImageView();
+        this.imageMonsterView = new ImageView();
         this.editImage("barbare",imageHeroView);
         this.editImage("tamagoshi",imageMonsterView);
 
@@ -122,5 +124,6 @@ public class CombatFrame extends Stage {
         alert.setHeaderText("Le combat est terminé");
         alert.setContentText("Le vainqueur est " + vainqueur.whoIam());
         alert.show();
+
     }
 }
