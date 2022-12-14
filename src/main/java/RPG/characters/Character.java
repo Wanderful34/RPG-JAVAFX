@@ -1,21 +1,22 @@
 package RPG.characters;
 
-public abstract class Character {
+public abstract class Character extends  Personnage{
     private int maxHp;
     private int currentHp;
-
     private int force;
-
     private int armor;
 
 
-    public Character(int maxHp, int currentHp, int force, int armor) {
+    public Character(String image, int maxHp, int currentHp, int force, int armor) {
+        super(image);
         this.maxHp = maxHp;
         this.currentHp = currentHp;
         this.force = force;
         this.armor = armor;
     }
-
+    public void setCurrentHpToMax(){
+        currentHp = maxHp;
+    }
     public int getMaxHp() {
         return maxHp;
     }

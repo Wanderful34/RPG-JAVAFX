@@ -128,7 +128,7 @@ public class CharacterInfoFrame extends Stage {
     }
 
     private void addPoint(){
-        hero.usePoint();
+        hero.decreaseSkillPoints();
         testSkillPoint(hero.getSkillPoint());
         updateFrame();
     }

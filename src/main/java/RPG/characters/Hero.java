@@ -11,18 +11,28 @@ public class Hero extends Character{
 
     private static Hero hero;
 
+    public Hero(String image, int maxHp, int currentHp, int force, int armor) {
+        super(image, maxHp, currentHp, force, armor);
+    }
+    private Hero(String image){
+        super(image,30,30,15,15);
+        skillPoint = 12;
+        level = 1;
+    }
+
+    @Override
+    public void affectHero() {
+
+    }
+
     public static Hero getIntance(){
         if(hero == null){
-            hero = new Hero();
+            hero = new Hero("barbare");
         }
         return hero;
     }
 
-    private Hero(){
-        super(30,30,15,15);
-        skillPoint = 12;
-        level = 1;
-    }
+
     public int getLevel() {
         return level;
     }
@@ -39,11 +49,12 @@ public class Hero extends Character{
         this.setCurrentHp(hp);
     }
 
-    public void usePoint(){
+    public void decreaseSkillPoints(){
         this.skillPoint--;
     }
 
-    public void addPoint(){
+
+    public void increasePoints(){
         this.skillPoint++;
     }
 
