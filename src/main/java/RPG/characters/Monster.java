@@ -11,4 +11,9 @@ public class Monster extends Character{
     public void affectHero() {
 
     }
+
+    @Override
+    public String whoIam() {
+        return "Monster";
+    }
 }

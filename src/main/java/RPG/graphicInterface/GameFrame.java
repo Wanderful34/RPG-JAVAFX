@@ -2,6 +2,8 @@ package RPG.graphicInterface;
 
 import RPG.characters.Character;
 import RPG.characters.Hero;
+import RPG.characters.Monster;
+import RPG.event.Combat;
 import RPG.graphic.TamaJPanel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -46,7 +48,7 @@ public class GameFrame extends Stage {
         this.hero = Hero.getIntance();
         //PicturePanel heroImagePanel = new PicturePanel(x, y,"/image/tamagoshi.png");
         BorderPane pane = new BorderPane();
-        Scene scene = new Scene(pane, x*2, y);
+        Scene scene = new Scene(pane, x, y);
 
         messageEtat = new Label("MessageEtat");
         messageJeu = new Label("MessageJeux");
@@ -73,6 +75,9 @@ public class GameFrame extends Stage {
                 }
                 else{
                     editTextMessage("Lancement de la prochaine rencontre");
+                    boutonAction.setDisable(true);
+                    Combat combat = new Combat(hero,new Monster(hero));
+                    combat.combatStart();
                 }
             }
         });
@@ -96,8 +101,8 @@ public class GameFrame extends Stage {
         this.editImageCharacter("tamagoshi");
 
 
-        pane.setLeft(imageHeroView);
-        pane.setRight(imageCharacterView);
+        pane.setCenter(imageHeroView);
+        //pane.setRight(imageCharacterView);
         this.setTitle("RPG");
         this.setScene(scene);
         this.show();
