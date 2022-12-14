@@ -66,4 +66,9 @@ public class Hero extends Character{
     public void setSkillPoint(int skillPoint) {
         this.skillPoint = skillPoint;
     }
+
+    @Override
+    public String whoIam() {
+        return "Hero";
+    }
 }

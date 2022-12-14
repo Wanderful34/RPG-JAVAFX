@@ -47,4 +47,9 @@ public abstract class Character {
     public void setArmor(int armor) {
         this.armor = armor;
     }
+    public boolean takeDamage(int dmg){
+        this.currentHp-=dmg;
+        return(this.currentHp<=0);
+    }
+    public abstract String whoIam();
 }
