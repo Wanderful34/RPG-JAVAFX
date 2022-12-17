@@ -3,6 +3,7 @@ package RPG.graphicInterface;
 import RPG.characters.Character;
 import RPG.characters.Hero;
 import RPG.characters.Monster;
+import RPG.characters.Personnage;
 import RPG.event.Combat;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -77,8 +78,8 @@ public class CombatFrame extends Stage {
 
         this.imageHeroView = new ImageView();
         this.imageMonsterView = new ImageView();
-        this.editImage("barbare",imageHeroView);
-        this.editImage("tamagoshi",imageMonsterView);
+        this.editImage(hero.getImage(),imageHeroView);
+        this.editImage(monster.getImage(), imageMonsterView);
 
 
         pane.setLeft(imageHeroView);

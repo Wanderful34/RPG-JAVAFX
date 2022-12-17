@@ -8,4 +8,8 @@ public abstract class Personnage{
     }
 
     public abstract void affectHero();
+
+    public String getImage(){
+        return this.image;
+    }
 }

@@ -1,5 +1,8 @@
 package RPG.characters;
 
+import RPG.event.Combat;
+import RPG.graphicInterface.GameFrame;
+
 public class Monster extends Character{
 
     public Monster(String image) {
@@ -9,7 +12,9 @@ public class Monster extends Character{
 
     @Override
     public void affectHero() {
-
+        GameFrame.getInstance().editTextMessage("Un monstre apparaît");
+        Combat combat = new Combat(Hero.getIntance(),this);
+        combat.combatStart();
     }
 
     @Override

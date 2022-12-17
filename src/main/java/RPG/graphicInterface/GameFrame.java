@@ -1,8 +1,7 @@
 package RPG.graphicInterface;
 
+import RPG.characters.*;
 import RPG.characters.Character;
-import RPG.characters.Hero;
-import RPG.characters.Monster;
 import RPG.event.Combat;
 import RPG.graphic.TamaJPanel;
 import javafx.event.ActionEvent;
@@ -32,7 +31,6 @@ public class GameFrame extends Stage {
     private ImageView imageHeroView;
 
     private Character character;
-    private Button boutonLancerDes;
     private Button boutonAction;
 
     private Button boutonInfoCharacter;
@@ -46,7 +44,6 @@ public class GameFrame extends Stage {
     private GameFrame() {
         super();
         this.hero = Hero.getIntance();
-        //PicturePanel heroImagePanel = new PicturePanel(x, y,"/image/tamagoshi.png");
         BorderPane pane = new BorderPane();
         Scene scene = new Scene(pane, x, y);
 
@@ -58,14 +55,7 @@ public class GameFrame extends Stage {
 
         HBox boxBouton = new HBox();
         boxBouton.setAlignment(Pos.CENTER);
-        boutonLancerDes = new Button("Lancer les dés");
-        boutonLancerDes.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent arg0) {
-                //Action du Bouton
-                hero.levelUp();
-            }
-        });
+
         boutonAction = new Button("Prochaine Rencontre");
         boutonAction.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -75,9 +65,9 @@ public class GameFrame extends Stage {
                 }
                 else{
                     editTextMessage("Lancement de la prochaine rencontre");
-                    boutonAction.setDisable(true);
-                    Combat combat = new Combat(hero,new Monster("tamagoshi"));
-                    combat.combatStart();
+                    //boutonAction.setDisable(true);
+                    Personnage personnage = Factory.createPersonnage();
+                    personnage.affectHero();
                 }
             }
         });
@@ -92,30 +82,21 @@ public class GameFrame extends Stage {
         });
 
         boxBouton.getChildren().add(boutonAction);
-        boxBouton.getChildren().add(boutonLancerDes);
         boxBouton.getChildren().add(boutonInfoCharacter);
         pane.setTop(message);
         pane.setBottom(boxBouton);
 
-        this.editImageHero("barbare");
-        this.editImageCharacter("tamagoshi");
+        this.editImageHero(hero.getImage());
 
 
         pane.setCenter(imageHeroView);
-        //pane.setRight(imageCharacterView);
+
         this.setTitle("RPG");
         this.setScene(scene);
         this.show();
     }
 
-    public void editImageCharacter(String image){
-        if(imageCharacterView == null){
-            this.imageCharacterView = new ImageView();
-        }
-        URL input = GameFrame.class.getResource("/image/"+image+".png");
-        Image imageCharacter = new Image(input.toExternalForm(),x,y-100,false,true);
-        this.imageCharacterView.setImage(imageCharacter);
-    }
+
     public void editImageHero(String image){
         if(imageHeroView == null){
              this.imageHeroView = new ImageView();
@@ -124,17 +105,8 @@ public class GameFrame extends Stage {
         Image imageCharacter = new Image(input.toExternalForm(),x,y-100,false,true);
         this.imageHeroView.setImage(imageCharacter);
     }
-
-    public void editTextBoutonAction(String text){
-        boutonAction.setText(text);
-    }
-
     public void editStateBoutonAction(Boolean state){
         boutonAction.setDisable(!state);
-    }
-
-    public void editStateBoutonLancerDes(Boolean state){
-        boutonLancerDes.setDisable(!state);
     }
 
     public void editStateBoutonInfoCharacter(Boolean state){

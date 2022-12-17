@@ -22,7 +22,7 @@ public class Hero extends Character{
 
     @Override
     public void affectHero() {
-
+        //Do nothing
     }
 
     public static Hero getIntance(){
