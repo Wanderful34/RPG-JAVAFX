@@ -76,7 +76,7 @@ public class GameFrame extends Stage {
                 else{
                     editTextMessage("Lancement de la prochaine rencontre");
                     boutonAction.setDisable(true);
-                    Combat combat = new Combat(hero,new Monster(hero));
+                    Combat combat = new Combat(hero,new Monster("tamagoshi"));
                     combat.combatStart();
                 }
             }
