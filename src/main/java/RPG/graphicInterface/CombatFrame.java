@@ -29,6 +29,8 @@ public class CombatFrame extends Stage {
     private static final int y = 400;
     private Label messageEtat;
     private Label messageJeu;
+    private Label hpHero;
+    private Label hpMonster;
     private Hero hero;
     private Monster monster;
     private ImageView imageMonsterView;
@@ -46,7 +48,8 @@ public class CombatFrame extends Stage {
         Random r = new Random();
         BorderPane pane = new BorderPane();
         Scene scene = new Scene(pane, x*2, y);
-
+        hpHero = new Label("");
+        hpMonster = new Label("");
         messageEtat = new Label("Lancer votre dés");
         messageJeu = new Label("-");
         VBox message = new VBox();
@@ -63,11 +66,12 @@ public class CombatFrame extends Stage {
                 int lancesDes = r.nextInt(12-1)+1;
                 editTextMessage("Votre lancé de dés est " + lancesDes);
                 editTextMessageEtat(combat.whoIsAttaquant().whoIam() + " inflige " + combat.dmgCalcul(lancesDes) + " de dégat à " + combat.whoIsDefenseur().whoIam());
-
                 if(combat.nextTurn(lancesDes)){
                     alertEndGame(combat.whoIsDefenseur());
                     combat.combatEnd();
                 }
+                updateHealtPoint(hpHero, hero.getCurrentHp());
+                updateHealtPoint(hpMonster, monster.getCurrentHp());
 
             }
         });
@@ -75,15 +79,21 @@ public class CombatFrame extends Stage {
         boxBouton.getChildren().add(boutonLancerDes);
         pane.setTop(message);
         pane.setBottom(boxBouton);
-
+        updateHealtPoint(hpHero, hero.getCurrentHp());
+        updateHealtPoint(hpMonster, monster.getCurrentHp());
         this.imageHeroView = new ImageView();
         this.imageMonsterView = new ImageView();
         this.editImage(hero.getImage(),imageHeroView);
         this.editImage(monster.getImage(), imageMonsterView);
 
+        VBox heroBox = new VBox();
+        heroBox.getChildren().addAll(hpHero,imageHeroView);
 
-        pane.setLeft(imageHeroView);
-        pane.setRight(imageMonsterView);
+        VBox monsterBox = new VBox();
+        monsterBox.getChildren().addAll(hpMonster,imageMonsterView);
+
+        pane.setLeft(heroBox);
+        pane.setRight(monsterBox);
 
         this.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -117,6 +127,10 @@ public class CombatFrame extends Stage {
     }
     public void editTextMessage(String text){
         messageEtat.setText(text);
+    }
+
+    public void updateHealtPoint(Label p,int hp){
+        p.setText("HP : " + hp);
     }
 
     public void alertEndGame(Character vainqueur){
