@@ -11,7 +11,6 @@ import java.util.Random;
 public class Combat {
     private Hero hero;
     private Monster monster;
-
     private Character attaquant;
     private Character defenseur;
     private CombatFrame frame;

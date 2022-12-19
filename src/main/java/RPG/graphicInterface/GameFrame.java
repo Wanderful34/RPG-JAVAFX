@@ -26,7 +26,7 @@ public class GameFrame extends Stage {
     private Label messageEtat;
     private Label messageJeu;
     private Hero hero;
-
+    private int tours;
     private ImageView imageCharacterView;
     private ImageView imageHeroView;
 
@@ -43,12 +43,13 @@ public class GameFrame extends Stage {
     }
     private GameFrame() {
         super();
+        this.tours = 1;
         this.hero = Hero.getIntance();
         BorderPane pane = new BorderPane();
         Scene scene = new Scene(pane, x, y);
 
-        messageEtat = new Label("MessageEtat");
-        messageJeu = new Label("MessageJeux");
+        messageEtat = new Label("-");
+        messageJeu = new Label("-");
         VBox message = new VBox();
         message.setAlignment(Pos.CENTER);
         message.getChildren().addAll(messageEtat,messageJeu);
@@ -64,8 +65,8 @@ public class GameFrame extends Stage {
                     editTextMessage("Impossible tant que tous les points de compétence on était attribué");
                 }
                 else{
+                    printNextTurn();
                     editTextMessage("Lancement de la prochaine rencontre");
-                    //boutonAction.setDisable(true);
                     Personnage personnage = Factory.createPersonnage();
                     personnage.affectHero();
                 }
@@ -117,8 +118,12 @@ public class GameFrame extends Stage {
         messageEtat.setText(text);
     }
     public void editTextMessage(String text){
-        messageEtat.setText(text);
+        messageJeu.setText(text);
     }
 
+    public void printNextTurn(){
+        this.tours++;
+        editTextMessageEtat("Tours : " + this.tours);
+    }
 
 }
