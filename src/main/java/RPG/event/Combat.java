@@ -23,6 +23,7 @@ public class Combat {
 
     public void combatStart(){
         this.frame = new CombatFrame(this.hero,this.monster,this);
+        GameFrame.getInstance().hide();
         Random r = new Random();
         if(r.nextInt((100 - 1) +1)<=65){
             this.attaquant = this.hero;
@@ -37,10 +38,17 @@ public class Combat {
     public void combatEnd(){
         this.frame.close();
         GameFrame.getInstance().editStateBoutonAction(true);
+        GameFrame.getInstance().show();
     }
 
     public int dmgCalcul(int lancesDes){
-        return(lancesDes + attaquant.getForce() - defenseur.getArmor());
+        int dmg = lancesDes + attaquant.getForce() - defenseur.getArmor();
+        if(dmg<0){
+            return 0;
+        }
+        else{
+            return dmg;
+        }
     }
 
     public boolean nextTurn(int lancesDes){

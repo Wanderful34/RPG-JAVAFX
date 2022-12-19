@@ -32,6 +32,7 @@ public class CharacterInfoFrame extends Stage {
         super();
         GameFrame g = GameFrame.getInstance();
         g.editStateBoutonInfoCharacter(false);
+        g.editStateBoutonAction(false);
         this.hero=Hero.getIntance();
         this.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -47,6 +48,7 @@ public class CharacterInfoFrame extends Stage {
                 }
                 else{
                     g.editStateBoutonInfoCharacter(true);
+                    g.editStateBoutonAction(true);
                     close();
                 }
             }
