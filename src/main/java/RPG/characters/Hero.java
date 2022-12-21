@@ -82,4 +82,8 @@ public class Hero extends Character{
     public String whoIam() {
         return "Hero";
     }
+
+    public void resetCharacteristics() {
+        hero = null;
+    }
 }

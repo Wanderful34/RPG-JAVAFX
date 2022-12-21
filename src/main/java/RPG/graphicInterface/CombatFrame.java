@@ -37,10 +37,12 @@ public class CombatFrame extends Stage {
     private ImageView imageHeroView;
     private Button boutonLancerDes;
 
+    public interface EndGameListener{
+        void onVainqueur(Character caCharacter);
+    }
 
 
-
-    public CombatFrame(Hero hero, Monster monster, Combat combat) {
+    public CombatFrame(Hero hero, Monster monster, Combat combat, EndGameListener endGameListener) {
         super();
         this.setTitle("Combat contre un Monstre");
         this.hero = hero;
@@ -67,6 +69,7 @@ public class CombatFrame extends Stage {
                 editTextMessage("Votre lancé de dés est " + lancesDes);
                 editTextMessageEtat(combat.whoIsAttaquant().whoIam() + " inflige " + combat.dmgCalcul(lancesDes) + " de dégat à " + combat.whoIsDefenseur().whoIam());
                 if(combat.nextTurn(lancesDes)){
+                    endGameListener.onVainqueur(combat.whoIsDefenseur());
                     alertEndGame(combat.whoIsDefenseur());
                     combat.combatEnd();
                 }
@@ -139,6 +142,5 @@ public class CombatFrame extends Stage {
         alert.setHeaderText("Le combat est terminé");
         alert.setContentText("Le vainqueur est " + vainqueur.whoIam());
         alert.show();
-
     }
 }

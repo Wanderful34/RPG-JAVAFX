@@ -3,6 +3,7 @@ package RPG.event;
 import RPG.characters.Character;
 import RPG.characters.Hero;
 import RPG.characters.Monster;
+import RPG.characters.Personnage;
 import RPG.graphicInterface.CombatFrame;
 import RPG.graphicInterface.GameFrame;
 
@@ -21,7 +22,18 @@ public class Combat {
     }
 
     public void combatStart(){
-        this.frame = new CombatFrame(this.hero,this.monster,this);
+        this.frame = new CombatFrame(this.hero, this.monster, this, new CombatFrame.EndGameListener() {
+            @Override
+            public void onVainqueur(Character character) {
+                if (character instanceof Monster && hero.getCurrentHp()<=0){
+                    System.out.println("Game over");
+                    GameFrame.getInstance().restartGame();
+                }else if (character instanceof Hero && GameFrame.getInstance().getTours()==6){
+                    System.out.println("Hero win the game win");
+                    GameFrame.getInstance().restartGame();
+                }
+            }
+        });
         GameFrame.getInstance().hide();
         Random r = new Random();
         if(r.nextInt((100 - 1) +1)<=65){

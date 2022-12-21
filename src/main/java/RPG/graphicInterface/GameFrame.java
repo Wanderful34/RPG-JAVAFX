@@ -68,7 +68,12 @@ public class GameFrame extends Stage {
                     printNextTurn();
                     editTextMessage("Lancement de la prochaine rencontre");
                     Personnage personnage = Factory.createPersonnage();
+                    if ((personnage instanceof MaitreArme || personnage instanceof Merlin)&& tours==6){
+                        restartGame();
+                        return;
+                    }
                     personnage.affectHero();
+
                 }
             }
         });
@@ -97,6 +102,9 @@ public class GameFrame extends Stage {
         this.show();
     }
 
+    public int getTours() {
+        return tours;
+    }
 
     public void editImageHero(String image){
         if(imageHeroView == null){
@@ -124,6 +132,11 @@ public class GameFrame extends Stage {
     public void printNextTurn(){
         this.tours++;
         editTextMessageEtat("Tours : " + this.tours);
+    }
+    public void restartGame(){
+        gameFrame.close();
+        hero.resetCharacteristics();
+        //new GameFrame();
     }
 
 }
