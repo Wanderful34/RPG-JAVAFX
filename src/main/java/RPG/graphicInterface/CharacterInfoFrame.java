@@ -11,7 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class CharacterInfoFrame extends Stage {
@@ -43,6 +45,7 @@ public class CharacterInfoFrame extends Stage {
                     alert.setTitle("Erreur");
                     alert.setHeaderText("Finir vos action");
                     alert.setContentText("Utiliser tout vos point de compétences");
+                    alert.initStyle(StageStyle.UTILITY);
                     alert.show();
                     event.consume();
                 }
@@ -105,6 +108,7 @@ public class CharacterInfoFrame extends Stage {
         testSkillPoint(hero.getSkillPoint());
 
         this.setTitle("Information Héro");
+        this.initModality(Modality.APPLICATION_MODAL);
         this.setScene(scene);
         this.show();
 

@@ -6,6 +6,10 @@ import RPG.characters.Monster;
 import RPG.characters.Personnage;
 import RPG.graphicInterface.CombatFrame;
 import RPG.graphicInterface.GameFrame;
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogEvent;
+import javafx.stage.StageStyle;
 
 import java.util.Random;
 
@@ -25,13 +29,12 @@ public class Combat {
         this.frame = new CombatFrame(this.hero, this.monster, this, new CombatFrame.EndGameListener() {
             @Override
             public void onVainqueur(Character character) {
+                frame.close();
                 if (character instanceof Monster && hero.getCurrentHp()<=0){
-                    System.out.println("Game over");
-                    GameFrame.getInstance().restartGame();
+                    GameFrame.getInstance().closeAndFinishTheGame(character);
                 }else if (character instanceof Hero && GameFrame.getInstance().getTours()==6){
-                    System.out.println("Hero win the game win");
-                    GameFrame.getInstance().restartGame();
-                }
+                    GameFrame.getInstance().closeAndFinishTheGame(character);
+                }else combatEnd();
             }
         });
         GameFrame.getInstance().hide();
@@ -47,7 +50,6 @@ public class Combat {
     }
 
     public void combatEnd(){
-        this.frame.close();
         GameFrame.getInstance().editStateBoutonAction(true);
         GameFrame.getInstance().show();
     }

@@ -15,4 +15,9 @@ public class MaitreArme extends Personnage{
         Hero.getIntance().levelUp();
     }
 
+    @Override
+    public String whoIam() {
+        return "MaitreArme";
+    }
+
 }

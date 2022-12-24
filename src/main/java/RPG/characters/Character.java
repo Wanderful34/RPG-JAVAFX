@@ -52,5 +52,4 @@ public abstract class Character extends  Personnage{
         this.currentHp-=dmg;
         return(this.currentHp<=0);
     }
-    public abstract String whoIam();
 }

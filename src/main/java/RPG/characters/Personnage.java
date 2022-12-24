@@ -12,4 +12,6 @@ public abstract class Personnage{
     public String getImage(){
         return this.image;
     }
+    public abstract String whoIam();
+
 }

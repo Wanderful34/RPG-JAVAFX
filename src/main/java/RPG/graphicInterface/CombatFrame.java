@@ -11,13 +11,16 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 import java.net.URL;
@@ -36,7 +39,8 @@ public class CombatFrame extends Stage {
     private ImageView imageMonsterView;
     private ImageView imageHeroView;
     private Button boutonLancerDes;
-
+    private Combat combat;
+    private EndGameListener endGameListener;
     public interface EndGameListener{
         void onVainqueur(Character caCharacter);
     }
@@ -47,6 +51,8 @@ public class CombatFrame extends Stage {
         this.setTitle("Combat contre un Monstre");
         this.hero = hero;
         this.monster = monster;
+        this.combat = combat;
+        this.endGameListener = endGameListener;
         Random r = new Random();
         BorderPane pane = new BorderPane();
         Scene scene = new Scene(pane, x*2, y);
@@ -69,9 +75,7 @@ public class CombatFrame extends Stage {
                 editTextMessage("Votre lancé de dés est " + lancesDes);
                 editTextMessageEtat(combat.whoIsAttaquant().whoIam() + " inflige " + combat.dmgCalcul(lancesDes) + " de dégat à " + combat.whoIsDefenseur().whoIam());
                 if(combat.nextTurn(lancesDes)){
-                    endGameListener.onVainqueur(combat.whoIsDefenseur());
                     alertEndGame(combat.whoIsDefenseur());
-                    combat.combatEnd();
                 }
                 updateHealtPoint(hpHero, hero.getCurrentHp());
                 updateHealtPoint(hpMonster, monster.getCurrentHp());
@@ -112,6 +116,7 @@ public class CombatFrame extends Stage {
         });
 
         this.setScene(scene);
+        this.initModality(Modality.APPLICATION_MODAL);
         this.show();
     }
 
@@ -141,6 +146,13 @@ public class CombatFrame extends Stage {
         alert.setTitle("Fin de combat");
         alert.setHeaderText("Le combat est terminé");
         alert.setContentText("Le vainqueur est " + vainqueur.whoIam());
+        alert.initStyle(StageStyle.UTILITY);
+        alert.setOnCloseRequest(new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent dialogEvent) {
+                endGameListener.onVainqueur(combat.whoIsDefenseur());
+            }
+        });
         alert.show();
     }
 }

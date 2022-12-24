@@ -8,14 +8,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.net.URL;
 
@@ -69,7 +73,7 @@ public class GameFrame extends Stage {
                     editTextMessage("Lancement de la prochaine rencontre");
                     Personnage personnage = Factory.createPersonnage();
                     if ((personnage instanceof MaitreArme || personnage instanceof Merlin)&& tours==6){
-                        restartGame();
+                        closeAndFinishTheGame(hero);
                         return;
                     }
                     personnage.affectHero();
@@ -98,6 +102,7 @@ public class GameFrame extends Stage {
         pane.setCenter(imageHeroView);
 
         this.setTitle("RPG");
+        this.initModality(Modality.APPLICATION_MODAL);
         this.setScene(scene);
         this.show();
     }
@@ -105,7 +110,20 @@ public class GameFrame extends Stage {
     public int getTours() {
         return tours;
     }
-
+    public void closeAndFinishTheGame(Personnage character){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Fin de partie");
+        alert.setHeaderText(null);
+        alert.setContentText("La partie est términé, le vaiqueur est le " + character.whoIam());
+        alert.initStyle(StageStyle.UTILITY);
+        alert.setOnCloseRequest(new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent dialogEvent) {
+                restartGame();
+            }
+        });
+        alert.show();
+    }
     public void editImageHero(String image){
         if(imageHeroView == null){
              this.imageHeroView = new ImageView();
@@ -135,8 +153,9 @@ public class GameFrame extends Stage {
     }
     public void restartGame(){
         gameFrame.close();
+        gameFrame = null;
         hero.resetCharacteristics();
-        //new GameFrame();
+        GameFrame.getInstance();
     }
 
 }

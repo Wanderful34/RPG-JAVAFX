@@ -17,5 +17,10 @@ public class Merlin extends Personnage {
         Hero.getIntance().setCurrentHpToMax();
     }
 
+    @Override
+    public String whoIam() {
+        return "Merlin";
+    }
+
 
 }
