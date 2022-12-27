@@ -1,5 +1,6 @@
 package RPG.graphicInterface;
 
+import RPG.Utils.GameConstants;
 import RPG.characters.*;
 import RPG.characters.Character;
 import RPG.event.Combat;
@@ -71,7 +72,7 @@ public class GameFrame extends Stage {
                     printNextTurn();
                     editTextMessage("Lancement de la prochaine rencontre");
                     Personnage personnage = Factory.createPersonnage();
-                    if ((personnage instanceof MaitreArme || personnage instanceof Merlin)&& tours==6){
+                    if ((personnage instanceof MaitreArme || personnage instanceof Merlin)&& tours== GameConstants.NB_TOURS_To_WIN){
                         closeAndFinishTheGame(hero);
                         return;
                     }

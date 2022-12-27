@@ -1,5 +1,6 @@
 package RPG.characters;
 
+import RPG.Utils.GameConstants;
 import RPG.graphicInterface.CharacterInfoFrame;
 
 public class Hero extends Character{
@@ -15,7 +16,7 @@ public class Hero extends Character{
         super(image, maxHp, currentHp, force, armor);
     }
     private Hero(String image){
-        super(image,30,30,15,15);
+        super(image, GameConstants.PV_MAX,GameConstants.PV_MAX,15,15);
         skillPoint = 12;
         level = 1;
     }
