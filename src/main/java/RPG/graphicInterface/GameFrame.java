@@ -3,7 +3,6 @@ package RPG.graphicInterface;
 import RPG.characters.*;
 import RPG.characters.Character;
 import RPG.event.Combat;
-import RPG.graphic.TamaJPanel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

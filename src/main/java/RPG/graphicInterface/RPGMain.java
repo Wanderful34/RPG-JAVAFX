@@ -3,7 +3,6 @@ package RPG.graphicInterface;
 import RPG.characters.Hero;
 import RPG.characters.Monster;
 import RPG.event.Combat;
-import RPG.tamagoshis.Tamagoshi;
 import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
